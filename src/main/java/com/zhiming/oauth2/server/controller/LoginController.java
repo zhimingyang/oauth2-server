@@ -1,5 +1,7 @@
 package com.zhiming.oauth2.server.controller;
 
+import com.zhiming.oauth2.server.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,11 +16,12 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/server")
-public class IndexController {
+public class LoginController {
     static {
         System.out.println("initing....");
     }
-
+    @Autowired
+    private LoginService loginService;
     /**
      * 登陆页渲染
      * @param req
@@ -39,17 +42,15 @@ public class IndexController {
     @RequestMapping(value = "dologin.do",method = RequestMethod.GET)
     public ModelAndView dologin(HttpServletRequest req){
         String uname = req.getParameter("username");
-        String password = req.getParameter("password");
-        System.out.println("登陆"+uname+" "+password);
-        if(uname!=null&&!"".equals(uname)&&uname.equals("admin")&&password!=null&&!"".equals(password)&&password.equals("admin123")){
-            req.getSession().setAttribute("uname",uname);
+        if(loginService.doLogin(req)){
             Map<String,String> mapParm = new HashMap<String,String>();
             mapParm.put("uname",uname);
-            mapParm.put("password",password);
             return new ModelAndView("login/sucess",mapParm);
         }else{
             ModelAndView view = new ModelAndView("login/error");
             return view;
         }
     }
+
+
 }

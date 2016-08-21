@@ -7,11 +7,10 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-
-<bean id = "dataService" scope="singleton" class="com.zhiming.oauth2.server.service.impl.DataServiceImpl"/>
-
-<bean id = "oAuthService" scope="singleton" class="com.zhiming.oauth2.server.service.impl.OAuthServiceImpl">
-    <property name="dataService" ref = "dataService"/>
-</bean>
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+    <bean id = "dataService" scope="singleton" class="com.zhiming.oauth2.server.service.impl.DataServiceImpl"/>
+    <bean id = "oAuthService" scope="singleton" class="com.zhiming.oauth2.server.service.impl.OAuthServiceImpl"/>
+    <bean id = "loginService" scope="singleton" class="com.zhiming.oauth2.server.service.impl.LoginServiceImpl"/>
+    <bean id = "clientService" scope="singleton" class="com.zhiming.oauth2.server.service.impl.ClientServiceImpl"/>
 
 </beans>
