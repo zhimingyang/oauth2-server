@@ -5,5 +5,4 @@ package com.zhiming.oauth2.server.service;
  */
 public interface ClientService {
 
-
 }

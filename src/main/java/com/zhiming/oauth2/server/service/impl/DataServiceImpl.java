@@ -7,21 +7,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
- * Created by zhiming on 2016-08-21.
+ * Data层，数据均为本地的内存保存，因为目的是快速可用，没有接入落地存储
  */
 public class DataServiceImpl implements DataService{
-
+    //用来保存接入的Client信息
     private static List<ClientBean> clientList = new ArrayList<ClientBean>();
+    //用来保存相关用户信息
     private static List<UserBean> userList = new ArrayList<UserBean>();
+    //用来保存Code和用户名的映射和Token和用户名的映射
     private static Map<String,String> loalCache = new HashMap<String,String>();
     static {
         ClientBean bean = new ClientBean();
         bean.setId(1);
         bean.setClientId("1001");
-        bean.setClientName("大易");
+        bean.setClientName("北京小森科技");
         bean.setClient_secret("123123adasdsa");
         clientList.add(bean);
 
@@ -35,6 +36,7 @@ public class DataServiceImpl implements DataService{
         userBean.setSignKey("1234");
         userList.add(userBean);
     }
+
     @Override
     public boolean ifClientIdEffective(String clientId) {
         for (ClientBean bean : clientList){
